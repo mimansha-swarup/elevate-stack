@@ -22,7 +22,7 @@ const config: Config = {
         },
         dark: {
           100: "#000000",
-          200: "#0F111",
+          200: "#0F1111",
           300: "#151821",
           400: "#212734",
           500: "#101012",
@@ -34,6 +34,7 @@ const config: Config = {
           700: "#DCE3F1",
           500: "#7B8EC8",
           400: "#858EAD",
+          200: "#e2e8f0",
         },
         "accent-blue": "#1DA1F2",
       },
@@ -75,5 +76,3 @@ const config: Config = {
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
 export default config;
-
-
