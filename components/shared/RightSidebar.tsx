@@ -27,27 +27,27 @@ const hotQuestions = [
 ];
 const popularTags = [
   {
-    _id: 1,
+    _id: "1",
     name: "javascript",
     total: 4,
   },
   {
-    _id: 2,
+    _id: "2",
     name: "javascript",
     total: 4,
   },
   {
-    _id: 3,
+    _id: "3",
     name: "javascript",
     total: 4,
   },
   {
-    _id: 4,
+    _id: "4",
     name: "javascript",
     total: 4,
   },
   {
-    _id: 5,
+    _id: "5",
     name: "javascript",
     total: 4,
   },
