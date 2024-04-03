@@ -5,7 +5,7 @@ import React, { ReactNode } from "react";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
-    <main className="background-light850_dark100">
+    <main className="background-light850_dark100 relative">
       <Navbar />
       <div className="flex">
         <LeftSidebar />
