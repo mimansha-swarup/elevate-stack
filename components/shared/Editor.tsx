@@ -4,6 +4,7 @@ import { Editor } from "@tinymce/tinymce-react";
 
 interface EditorProps {
   [key: string]: unknown | string | object;
+  onChange: (a: string, editor: Editor) => void;
 }
 const TinyEditor = ({ value, onChange, rest }: EditorProps) => {
   const theme = {
@@ -18,6 +19,7 @@ const TinyEditor = ({ value, onChange, rest }: EditorProps) => {
     <Editor
       apiKey={process.env.NEXT_PUBLIC_TINYMCE_KEY}
       value={value?.toString()}
+      // @ts-ignore
       onEditorChange={onChange}
       init={{
         ...theme,
@@ -51,6 +53,7 @@ const TinyEditor = ({ value, onChange, rest }: EditorProps) => {
         content_style:
           "body { font-family:Inter,Arial,sans-serif; font-size:14px }",
       }}
+      // @ts-ignore
       {...rest}
     />
   );
