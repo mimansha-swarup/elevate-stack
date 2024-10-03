@@ -55,7 +55,7 @@ const QuestionCard = ({
 
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
         <Metric
-          imgUrl="/assets/icons/avatar.svg"
+          imgUrl={author.picture}
           alt="user"
           value={author.name}
           title="- asked 1 hour ago"
@@ -78,7 +78,7 @@ const QuestionCard = ({
           textStyle="small-medium text-dark400_light800"
         />
         <Metric
-          imgUrl={author.picture}
+          imgUrl="/assets/icons/eye.svg"
           alt="eye"
           value={formatNumbers(views)}
           title="Views"
