@@ -4,14 +4,14 @@ export default authMiddleware({
   publicRoutes: [
     "/",
     "/api/webhook",
-    "/question/:id",
+    "question/:id",
     "/tags",
     "/tags/:id",
     "/profile/:id",
     "/community",
     "/jobs",
   ],
-  ignoredRoutes: ["/api/chatgpt", "/api/webhook"],
+  ignoredRoutes: ["/api/webhook", "/api/chatgpt"],
 });
 
 export const config = {
