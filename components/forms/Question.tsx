@@ -30,7 +30,7 @@ const formSchema = z.object({
   }),
 });
 
-const Question = ({ mongoUserId }) => {
+const Question = ({ mongoUserId }:{mongoUserId: string}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const editorRef = useRef(null);
   const router = useRouter();
