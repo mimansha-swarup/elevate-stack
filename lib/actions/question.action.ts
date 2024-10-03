@@ -3,16 +3,39 @@
 import Question from "@/database/question.model";
 import { connectToDatabase } from "../mongoose";
 import Tag from "@/database/tag.model";
+import User from "@/database/user.model";
+import { revalidatePath } from "next/cache";
 
-export async function createQuestion(params) {
+export async function getQuestions(params: any) {
+
+  try {
+    connectToDatabase();
+    const questions = await Question.find({})
+      .populate({
+        path: "tags",
+        model: Tag,
+      })
+      .populate({
+        path: "authors",
+        model: User,
+      });
+
+    return { questions };
+  } catch (error) {
+    console.log("error: ", error);
+  }
+}
+
+export async function createQuestion(params: any) {
   try {
     connectToDatabase();
 
-    const { title, content, tags, author, path } = params;
+    const { title, content, tags, authors, author, path } = params;
+    console.log("params: ", params);
     const question = await Question.create({
       title,
       content,
-      author,
+      authors: authors ?? author,
     });
     const tagDocuments = [];
 
@@ -45,5 +68,7 @@ export async function createQuestion(params) {
         },
       },
     });
+
+    revalidatePath(path);
   } catch (error) {}
 }

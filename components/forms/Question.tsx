@@ -17,9 +17,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { QuestionsSchema } from "@/lib/validation";
 import TinyEditor from "../shared/Editor";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { createQuestion } from "@/lib/actions/question.action";
+
+import { useRouter, usePathname } from "next/navigation";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -27,8 +30,12 @@ const formSchema = z.object({
   }),
 });
 
-const Question = () => {
-  // 1. Define your form.
+const Question = ({ mongoUserId }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const editorRef = useRef(null);
+  const router = useRouter();
+  const pathName = usePathname();
+
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
     defaultValues: {
@@ -39,10 +46,24 @@ const Question = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof QuestionsSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
+    console.log(values);
+    setIsSubmitting(false);
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    try {
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        authors: JSON.parse(mongoUserId),
+      });
+
+      router.push("/");
+    } catch (error) {
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   const handleInputKeyDown = (
@@ -147,7 +168,6 @@ const Question = () => {
                       placeholder="Add tags..."
                       onKeyDown={(e) => handleInputKeyDown(e, field)}
                     />
-                    {console.log(field.value)}
                     {field.value.length > 0 && (
                       <div className="flex-start mt-2.5 gap-2.5">
                         {field.value?.map((tag) => (

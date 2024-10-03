@@ -1,10 +1,9 @@
+"use client";
 import React from "react";
-
 import { Editor } from "@tinymce/tinymce-react";
 
 interface EditorProps {
-    [key: string]: unknown| string | object;
-  
+  [key: string]: unknown | string | object;
 }
 const TinyEditor = ({ value, onChange, rest }: EditorProps) => {
   const theme = {
