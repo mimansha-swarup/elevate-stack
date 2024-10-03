@@ -1,19 +1,18 @@
 import { Schema, Document, models, model } from "mongoose";
 
 export interface IUser extends Document {
-clerkId: string;
-name: string;
-userName: string;
-email: string;
-picture: string;
-location: string;
-password?: string;
-bio?: string;
-portfolioWebsite?: string;
-reputation?: number;
-saved:  Schema.Types.ObjectId[];
-joinedAt: Date;
-
+  clerkId: string;
+  name: string;
+  userName: string;
+  email: string;
+  picture: string;
+  saved: Schema.Types.ObjectId[];
+  joinedAt: Date;
+  portfolioWebsite?: string;
+  location?: string;
+  bio?: string;
+  reputation?: number;
+  password?: string;
 }
 
 const UserSchema = new Schema({
@@ -42,7 +41,6 @@ const UserSchema = new Schema({
   },
   location: {
     type: String,
-    required: true,
   },
   password: {
     type: String,
@@ -70,7 +68,6 @@ const UserSchema = new Schema({
     default: Date.now,
   },
 });
-
 
 const User = models.User || model("User", UserSchema);
 
