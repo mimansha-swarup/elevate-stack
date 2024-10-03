@@ -20,6 +20,7 @@ export async function getUserById(params: any) {
   }
 }
 export async function createUser(userData: any) {
+  console.log("userData: ", userData);
   try {
     connectToDatabase();
 
@@ -28,6 +29,7 @@ export async function createUser(userData: any) {
     return newUser;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 export async function updateUser(userData: any) {
@@ -40,6 +42,7 @@ export async function updateUser(userData: any) {
     revalidatePath(path);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 export async function deleteUSer(userData: any) {
@@ -62,5 +65,6 @@ export async function deleteUSer(userData: any) {
     return deletedUser;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
