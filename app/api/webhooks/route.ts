@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
-  const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
+  const WEBHOOK_SECRET = process.env.NEXT_CLERK_WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
@@ -53,11 +53,10 @@ export async function POST(req: Request) {
   // Do something with the payload
   // For this guide, you simply log the payload to the console
   const { id } = evt.data;
-  
+
   switch (evt.type) {
     case "user.created":
-    case "user.updated":
-       {
+    case "user.updated": {
       const {
         email_addresses,
         image_url,
@@ -79,7 +78,7 @@ export async function POST(req: Request) {
         });
         return NextResponse.json({ message: "OK", user: mongoUser });
       }
-  
+
       const mongoUser = await updateUser({
         clerkId: id,
         updatedData: userDetails,
@@ -87,12 +86,11 @@ export async function POST(req: Request) {
       });
       return NextResponse.json({ message: "OK", user: mongoUser });
     }
-    
-    case "user.deleted":{
-      
+
+    case "user.deleted": {
       const deletedUser = await deleteUSer({
-        clerkId: id
-      })
+        clerkId: id,
+      });
       return NextResponse.json({ message: "OK", user: deletedUser });
     }
 
