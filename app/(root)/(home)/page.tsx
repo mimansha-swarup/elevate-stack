@@ -106,7 +106,7 @@ import React, { useEffect } from "react";
 // ];
 
 const Home = async () => {
-  const { questions } = await getQuestions({});
+  const { questions =[] } = await getQuestions({}) || {};
   // console.log("results: ", results, getQuestions);
 
   return (
